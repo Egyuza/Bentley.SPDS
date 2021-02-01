@@ -1,0 +1,131 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: /miscdev-root/miscdev/vault/VisualStudioWizards/MSTNToolWizard/Templates/1033/Tool.mke,v $
+#
+#  $Copyright: (c) 2013 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+appName		= [!output SAFE_PROJECT_NAME]Tool
+sAppName	= [!output SAFE_PROJECT_NAME]Tool
+
+baseDir         = $(_MakeFilePath)
+langSpec	= $(baseDir)english/
+
+
+%include mdl.mki
+
+dirToSearch = $(MSMDE)/mdl/MicroStationAPI
+%include cincapnd.mki
+
+#----------------------------------------------------------------------
+# Define macros for files included in our link and resource merge
+#----------------------------------------------------------------------
+appRscs         = $(o)$(appName).rsc \
+                  $(o)$(appName)msg.rsc \
+                  $(o)$(sAppName)cmd.rsc
+
+#----------------------------------------------------------------------
+# Create needed output directories if they don't exist
+#----------------------------------------------------------------------
+$(o)$(tstdir)			: $(o)$(tstdir)
+
+#-----------------------------------------------------------------------
+#	Define constants specific to this example
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#	Generate non-language resource files
+#-----------------------------------------------------------------------
+$(baseDir)$(appName)cmd.h       : $(baseDir)$(appName)cmd.r
+
+$(o)$(appName)cmd.rsc		: $(baseDir)$(appName)cmd.r
+
+$(o)$(appName).rsc              :$(baseDir)$(appName).r
+
+
+#-----------------------------------------------------------------------
+#	Generate language resource files
+#-----------------------------------------------------------------------
+$(o)$(appName)msg.rsc              :$(langSpec)$(appName)msg.r
+
+#-----------------------------------------------------------------------
+#  Build Native Code 
+#-----------------------------------------------------------------------
+dlmObjs = \
+[!if OPTION_PLACEMENT]
+$(o)[!output SAFE_PROJECT_NAME]PrimitiveTool$(oext) \
+[!endif]
+[!if OPTION_MODIFY]
+$(o)[!output SAFE_PROJECT_NAME]ModifyTool$(oext) \
+[!endif]
+$(o)$(appName)$(oext)
+
+MSJ_SKIP_SIGNRSCS   = 1
+DLM_NAME            = $(appName)
+DLM_DEST            = $(mdlapps)
+DLM_SYM_NAME        = $(appName)sym
+DLM_RESL_NAME       = $(appName)res
+DLM_OBJECT_DEST     = $(o)
+DLM_LIBDEF_SRC      = $(baseDir)
+DLM_OBJECT_FILES    = $(dlmObjs)
+DLM_LIBRARY_FILES   = $(dlmLibs)
+DLM_NO_DLS          = 1		    # use DLLEXPORT instead
+DLM_NO_DEF          = 1
+DLM_NOENTRY         = 1
+DLM_NO_DELAYLOAD    = 1		
+DLM_LIBRARY_FILES 	= $(mdlLibs)dgnfileio.lib \
+                $(mdlLibs)toolsubs.lib \
+                $(mdlLibs)ditemlib.lib \
+		        $(mdlLibs)mdllib.lib 
+DLM_NO_SIGN         = 1     # only for test apps; any delivered app MUST be signed.
+
+#------------------------------------------------
+#	Compile the source files for the DLM
+#------------------------------------------------
+%include dlmcomp.mki
+
+[!if OPTION_VIEW]
+[!endif]
+[!if OPTION_PLACEMENT]
+$(o)[!output SAFE_PROJECT_NAME]PrimitiveTool$(oext) :$(baseDir)[!output SAFE_PROJECT_NAME]PrimitiveTool.cpp $(baseDir)[!output SAFE_PROJECT_NAME]PrimitiveTool.h
+
+[!endif]
+
+[!if OPTION_MODIFY]
+$(o)[!output SAFE_PROJECT_NAME]ModifyTool$(oext) :$(baseDir)[!output SAFE_PROJECT_NAME]ModifyTool.cpp $(baseDir)[!output SAFE_PROJECT_NAME]ModifyTool.h
+
+[!endif]
+$(o)$(appName)$(oext)   : $(baseDir)$(appName).cpp
+
+%include dlmlink.mki
+
+#-----------------------------------------------------------------------
+#	Merge Objects into one file
+#-----------------------------------------------------------------------
+$(o)$(sAppName).mi        : $(appRscs)
+	$(msg)	
+	>$(o)make.opt
+	-o$@
+	$(appRscs)
+	<
+	$(RLibCmd) @$(o)make.opt
+	~time
+
+#----------------------------------------------------------------------
+# complete construction of the .ma
+#----------------------------------------------------------------------
+# %include $(sAppName)rsc.mki
+#
+
+appRscs =   \
+         $(o)$(sAppName).mi
+
+$(mdlapps)$(appName).ma		: $(appRscs)
+	$(msg)
+	> $(o)make.opt
+	-o$@
+	$(appRscs)
+	<
+	$(RLibCmd) @$(o)make.opt
+	~time
+
+

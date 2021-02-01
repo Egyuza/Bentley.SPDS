@@ -1,0 +1,88 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: /miscdev-root/miscdev/mdl/examples/adrwdemo/adrwdemo.mke,v $
+#
+#  $Copyright: (c) 2013 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+appName 	= adrwdemo
+sAppName	= adrwd
+
+privateInc	= $(baseDir)
+langSpec	= $(baseDir)english/
+
+%include mdl.mki
+
+appObjects =		    \
+    $(mdlLibs)mdllib.dlo    \
+    $(mdlLibs)ditemlib.dlo
+
+appRscs = \
+   $(rscObjects)$(sAppName)cmd.rsc	\
+   $(rscObjects)$(sAppName)mt.rsc
+
+#----------------------------------------------------------
+# Create needed output directories in case they don't exist
+#----------------------------------------------------------
+always:
+    !~@mkdir $(o)
+    !~@mkdir $(rscObjects)
+    !~@mkdir $(reqdObjs)
+
+dirToSearch = $(genSrc)
+%include cincapnd.mki
+
+$(genSrc)$(sAppName)cmd.h	: $(baseDir)$(sAppName)cmd.r
+
+$(rscObjects)$(sAppName)cmd.rsc : $(baseDir)$(sAppName)cmd.r
+
+$(genSrc)$(sAppName)mt.r	: $(baseDir)$(sAppName)mt.mt $(privateInc)$(appName).h
+
+$(rscObjects)$(sAppName)mt.rsc	: $(genSrc)$(sAppName)mt.r
+
+#------------------------------------------------
+#   Set up to use dlmcomp.mki and dlmlink.mki
+#------------------------------------------------
+dlmObjs = \
+    $(o)$(appName)$(oext) 
+ 
+DLM_NO_DLS              = 1             # USE DLLEXPORT IN .CPP
+DLM_NO_DEF              = 1
+DLM_NOENTRY             = 1
+DLM_NO_NTBSADDR         = 1
+DLM_OBJECT_DEST         = $(o)
+DLM_LIBDEF_SRC          = $(baseDir)
+DLM_DEST                = $(mdlapps)
+DLM_NAME                = $(appName)
+DLM_ENTRY_NAME          = dllentry
+DLM_RESL_NAME           = $(appName)
+DLM_OBJECT_FILES        = $(dlmObjs)
+DLM_SYM_NAME            = $(dllName)
+DLM_SPECIAL_LINKOPT     = -fixed:no
+DLM_LIBRARY_FILES       = $(mdlLibs)toolsubs.lib \
+                          $(mdlLibs)BentleyDgn.lib \
+                          $(mdlLibs)ditemlib.lib \
+                          $(mdlLibs)msbspline.lib \
+                          $(mdlLibs)mdllib.lib                           
+DLM_NO_SIGN         = 1     # only for test apps; any delivered app MUST be signed.
+
+#----------------------------------------------------------------------
+#   Compile the source files for the DLM
+#----------------------------------------------------------------------
+
+$(o)$(appName)$(oext)		: $(baseDir)$(appName).cpp $(genSrc)$(sAppName)cmd.h
+
+%include dlmlink.mki
+
+
+$(reqdObjs)$(appName).mi		: $(appRscs)
+    $(msg)
+    > $(o)make.opt
+    -o$@
+    $(appRscs)
+    <
+    $(RLibCmd) @$(o)make.opt
+	~time
+
+%include $(baseDir)$(sAppName)rsc.mki
+

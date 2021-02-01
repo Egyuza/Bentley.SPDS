@@ -1,0 +1,17 @@
+#define CMD_IMODELVISITOR                       0x01000000  /* class 33 */ 
+#define CMD_IMODELVISITOR_ACTION                0x01010000  /* class 33 */ 
+#define CMD_IMODELVISITOR_ACTION_PROCESS        0x01010100  /* class 33 */ 
+#define CMD_IMODELVISITOR_ACTION_PUBLISH        0x01010200  /* class 33 */ 
+#define CMD_IMODELVISITOR_ACTION_PACKAGE        0x01010300  /* class 33 */ 
+#define CMD_IMODELVISITOR_ACTION_ADDSCHEMA      0x01010400  /* class 33 */ 
+#define CMD_IMODELVISITOR_ACTION_REPORT         0x01010500  /* class 33 */ 
+#define CMD_IMODELVISITOR_ACTION_OFFLINE        0x01010600  /* class 33 */ 
+#define CMD_IMODELVISITOR_ACTION_PUBLISHDGNDB   0x01010700  /* class 33 */ 
+#define CMD_IMODELVISITOR_SET                   0x01020000  /* class 33 */ 
+#define CMD_IMODELVISITOR_SET_PACKAGEOPTS       0x01020100  /* class 33 */ 
+#define CMD_IMODELVISITOR_SET_PUBOPTS           0x01020200  /* class 33 */ 
+#define CMD_IMODELVISITOR_SET_PROCALL           0x01020300  /* class 33 */ 
+#define CMD_IMODELVISITOR_ADD                   0x01030000  /* class 33 */ 
+#define CMD_IMODELVISITOR_ADD_ATTRIB            0x01030100  /* class 33 */ 
+#define CMD_IMODELSTART                         0x02000000  /* class 33 */ 
+#define CMD_IMODELSTART_CMD                     0x02010000  /* class 33 */ 

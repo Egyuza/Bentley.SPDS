@@ -1,0 +1,7 @@
+// Функции вывода сообщений:
+mdlOutput_messageCenter(MESSAGE_INFO, styleIdStr, styleIdStr, TRUE);
+
+// Конвертация строки из char* в w_char*:
+mbstowcs(styleNameWP, styleNameP, MAXLEN);
+
+

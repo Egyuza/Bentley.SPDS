@@ -1,0 +1,474 @@
+;-----------------------------------------------------------------------
+;
+;  Copyright (1993-95) Bentley Systems, Inc., All rights reserved.
+;
+;  Application Make File
+;
+;   $Workfile:   mif2s.set  $
+;   $Revision: 1.1.1.1 $
+;   	$Date: 1998/07/27 18:19:12 $
+;
+;  "MicroStation" is a registered trademark and "MDL" and "MicroCSL"
+;  are trademarks of Bentley Systems, Inc.
+;
+;  Limited permission is hereby granted to reproduce and modify this
+;  copyrighted material provided that the resulting code is used only
+;  in conjunction with Bentley Systems products under the terms of the
+;  license agreement provided therein, and that this notice is retained
+;  in its entirety in any such reproduction or modification.
+;
+;-----------------------------------------------------------------------
+;-----------------------------------------------------------------------
+; Settings file for use with the mif2s help file conversion program.
+; The version information below may be useful in identifying problems.
+;
+;    Language:   English
+;-----------------------------------------------------------------------
+
+[HeaderFiles]
+myappcmd.h myapp
+
+[TaskIdMarker]
+11
+
+[ContextMarker]
+12
+
+[GraphicMarker]
+13
+
+[TopicBodyPara]
+; These paragraph styles are passed as plain text.  Paragraph numbers
+; are ignored.  Two carriage returns are placed at the end of each
+; paragraph.
+;
+"TDescription"
+"KDescription"
+"Description"
+"SettingsUsed"
+"SDialogItem"
+"TSettings"
+"DItem"
+"ksfp"
+"sfp"
+"ksp"
+"sp"
+"GEntry"
+"GEntry,ge"
+"Body"
+"Monospaced"
+"TableFootnote"
+"Footnote"
+"ExplainFunction"
+"SAlso"
+"SSyntax"
+"Syntax"
+"TDescriptionLOP"
+"List 2"
+"List 2 top"
+"h4"
+
+[ListEntryPara]
+; These paragraph styles are considered list entries.  Paragraph
+; numbers or bullet characters are included if present.  Paragraph
+; text is indented. One carriage return is placed at the end of
+; each paragraph.
+;
+"SquentialList"
+"List"
+"TList"
+"CFStep"
+"CFandLStep"
+"Item"
+"KItem"
+"KNumberedItem"
+"FNumberedItem"
+"NumberedItem"
+"CResponse"
+"CStep"
+"Bullet"
+"TBullet"
+"KBullet"
+"CellNumbered"
+"TListLOP"
+"TBulletLOP"
+
+[LastListEntryPara]
+; These paragraph styles are treated the same as [ListEntryPara]
+; styles, except that two carriage returns are placed at the end
+; of each paragraph.
+;
+"LItem"
+"LNumberedItem"
+"LResponse"
+"KLResponse"
+"LStep"
+"KLStep"
+"FandLStep"
+"KFandLStep"
+"TLBullet"
+"LBullet"
+"KLBullet"
+"KResponse"
+"FStep"
+"KStep"
+"Response"
+"SyResponse"
+"Step"
+"TLBulletLOP"
+
+[IgnorePara]
+; Paragraphs in these styles are ignored.
+;
+"Cntext"
+"LogicalName"
+"LeftHeader"
+"RightHeader"
+"SideHeader"
+"SideHeaderLJ"
+"Header"
+"BleedTabNumber"
+"Caption"
+"Caption,cp"
+"CCaption"
+"RCaption"
+"LCCaption"
+"Footer"
+"OnFooter"
+"OnFileName"
+"footer"
+"AcadNote"
+"IndexEntry,ie"
+"View"
+"TechNote"
+"CKOr"
+;  ^ = adds "or" between keyins
+
+[LastMonoPara]
+"LCode"
+"KLCode"
+"BrCode"
+"CodeBreak,cb"
+"CodeBreak,c"
+"CodeLast,cl"
+
+[MonoPara]
+"Example"
+"Examples"
+"SExample"
+"Code"
+"KCode"
+"Code,co"
+
+[AttentionPara]
+; These paragraphs are treated as body text except that the word
+; "Hint:" is inserted before the paragraph.
+;
+"Hint"          "Hint: <CR>"
+"PLHint"        "Hint: <CR>"
+"PLNote"        "Note: <CR>"
+"Note"          "Note: <CR>"
+"Note,no"       "Note: <CR>"
+"Warning"       "Warning: <CR>"
+"PLWarning"     "Warning: <CR>"
+"Procedure"     ">> "
+"Procedure,pr"  ">> "
+"ProdAndPlat"   "Product and Platform: "
+"Abstract"      "Abstract: "
+
+[KeyinPara]
+; These paragraphs are treated as body text except that the word
+; "Key-in:" is inserted before the paragraph and the mif2s program
+; attempts to match them to entries in the header files listed
+; above, for tracking mode help.
+;
+"Keyin"
+"CKeyin"
+"LCKeyin"
+
+[GraphicPara]
+; These paragraphs contain names of graphics files to be inserted
+; in the help file.
+"HelpGraphic"
+
+[TableTitlePara]
+; Paragraphs in these styles are displayed as table titles.
+;
+"TableTitle"
+
+[TableEntryPara]
+; Paragraphs in these style are flowed into table cells.
+;
+"CellHeading"
+"CellToolName"
+"CCellHeading"
+"CellBody"
+"SCellBody"
+"CellBodySmall"
+"CellKeyIn"
+"CCellBody"
+"CVCellBody"
+"CellAnchor"
+"CellBullet"
+"TableCell"
+"UseTool"
+"UseThis"
+
+[TopicTitlePara]
+; This section describes the document structure by specifying the
+; logical depth of each type of heading paragraph.  Paragraphs in
+; these styles are converted into topic titles.  The numbers indicate
+; the logical depth of each heading type within the document, starting
+; from one.
+;
+; <name><whitespace><depth starting from 1>
+;
+"ReleaseNotes"  1
+"Part"          1
+"Glossary"      1
+"Appendix"      2
+"OnTitle"   	2
+"Chapter"       2
+"Introduction"  2
+"Menu"          2
+"ChapterLOP"    2
+"Exercise"      3
+"Lesson"        3
+"h1"            3
+"Palette"       3
+"h1TopOfPage"   3
+"heading1"      3
+"PaletteLOP"    3
+"FunctionRef"   4
+"GProcedure"    5
+"h2"            5
+"MItem"         5
+"ToolRef"       5
+"VwControl"     5
+"Letter"        5
+"DBox"          5
+"ToolRefLOP"    5
+"VwControlLOP"  5
+"PrTopic"       6
+"SDBox"     	6
+"h3"            6
+"DGroup"    	7
+
+[ConvertXRef]
+; Cross references in these styles are converted into hypertext jumps
+; provided the destination is one of the header paragraph types
+; listed in [TopicTitlePara].
+;
+; The second column specifies a string to insert before each occurrence
+; of a crossref of each type.  The third column specifies a string to
+; add after it.
+;
+"Tool tool"                                     ""      " tool"
+"Appendix"                                      ""      ""
+"Appendix in Intro MS"                          ""      ""
+"Cell Menu Item or key-in (page)"               ""      ""
+"Cell Monospaced"                               ""      ""
+"CellHeading (page)"                            ""      ""
+"CellTool (page)"                               ""      ""
+"CellFunction (page)"                           ""      ""
+"Heading"                                       ""      ""
+"Heading in Intro MS"                           ""      ""
+"Heading in Intro MS Review"                    ""      ""
+"Heading (see page)"                            ""      ""
+"Heading (page)"                                ""      ""
+"Heading No Quotes"                             ""      ""
+"Heading No Quotes (see Intro MS Review)"       ""      ""
+"Heading No Quotes (see Intro MS)"              ""      ""
+"Heading No Quotes (see page)"                  ""      ""
+"Heading No Quotes (see page xx)"               ""      ""
+"Heading No Quotes (page)"                      ""      ""
+"Heading No Quotes (see page in database)"      ""      ""
+"Heading No Quotes (see page in user)"          ""      ""
+"Heading on Page"                               ""      ""
+"Heading on Page i-"                            ""      ""
+"Heading on Page in user"                       ""      ""
+"Heading on Page in devsup"                     ""      ""
+"Heading on Page in database"                   ""      ""
+"See Heading & Page"                            ""      ""
+"Tool tool (see page in database)"              ""      " tool"
+"Tool tool (see page in user)"                  ""      " tool"
+"Tool tool (see page)"                          ""      " tool"
+"Tool (page)"                                   ""      ""
+"View Control (see page)"                       ""      " view control"
+"View Control (see page in user)"               ""      " view control"
+
+[IgnoreXRef]
+; Cross references in these styles are passed through as plain text
+; with no warning message and no attempt to convert into hypertext.
+;
+; The second column specifies a string to insert before each occurrence
+; of a crossref of each type.  The third column specifies a string to
+; add after.
+;
+"page"                                          ""      ""
+"paragraph number"                              ""      ""
+"Heading in Setup"                              ""      ""
+;"Footnote"                                     " ["    "]"
+"ReuseParagraph"                                ""      ""
+
+[HypertextChr]
+"HyperText"
+
+[CharacterTable]
+; Note: The strings in the third and fourth columns superficially
+; resemble string constants as used in the 'C' language, but they
+; are NOT fully implemented. "\n" works as in C, as does "\x##"
+; where ## represents a 2-digit hexadecimal number.  "NULL" is
+; a special case indicating no character mapping exists.  Any other
+; sequence of characters is taken literally.
+;
+; No entry in this table may exceed 64 characters in length.
+;
+;                                       Normal          Symbols to
+;       Frame #     Frame Name          DEC #           DEC
+;       -------     ----------          -----           -----
+
+	0x04      "DiscHyphen"          ""              "NULL"  ; discretionry hyphen
+	0x05      "NoHyphen"            ""              "NULL"  ; suppress hyphen
+	0x06      "SoftHyphen"          ""              "NULL"  ; automatic hyphen
+	0x08      "Tab"                 "<AL120>"       "NULL"  ; KLUDGE
+	0x09      "HardReturn"          "<CR>\n"        "NULL"  ; forced return
+	0x0a      "Reserved"            "NULL"          "NULL"  ; end of paragraph
+	0x0b      "Reserved"            "NULL"          "NULL"  ; end of flow
+	0x0d      "Reserved"            ""              ""      ; carriage return
+	0x10      "NumberSpace"         " "             "NULL"
+	0x11      "HardSpace"           " "             "NULL"
+	0x12      "ThinSpace"           ""              "NULL"
+	0x13      "EnSpace"             " "             "NULL"
+	0x14      "EmSpace"             " "             "NULL"
+	0x15      "HardHyphen"          "-"             "NULL"
+	0x27      "quotesingle"         "'"             "NULL"
+	0x60      "grave"               "`"             "NULL"
+	0x80      "Adieresis"           "\xC4"          "NULL"
+	0x81      "Aring"               "\xC5"          "NULL"
+	0x82      "Ccedilla"            "\xC7"          "NULL"
+	0x83      "Eacute"              "\xC9"          "NULL"
+	0x84      "Ntilde"              "\xD1"          "NULL"
+	0x85      "Odieresis"           "\xD6"          "NULL"
+	0x86      "Udieresis"           "\xDC"          "NULL"
+	0x87      "aacute"              "\xE1"          "NULL"
+	0x88      "agrave"              "\xE0"          "NULL"
+	0x89      "acircumflex"         "\xE2"          "NULL"
+	0x8A      "adieresis"           "\xE4"          "NULL"
+	0x8B      "atilde"              "\xE3"          "NULL"
+	0x8C      "aring"               "\xE5"          "NULL"
+	0x8D      "ccedilla"            "\xE7"          "NULL"
+	0x8E      "eacute"              "\xE9"          "NULL"
+	0x8F      "egrave"              "\xE8"          "NULL"
+	0x90      "ecircumflex"         "\xEA"          "NULL"
+	0x91      "edieresis"           "\xEB"          "NULL"
+	0x92      "iacute"              "\xED"          "NULL"
+	0x93      "igrave"              "\xEC"          "NULL"
+	0x94      "icircumflex"         "\xEE"          "NULL"
+	0x95      "idieresis"           "\xEF"          "NULL"
+	0x96      "ntilde"              "\xF1"          "NULL"
+	0x97      "oacute"              "\xF3"          "NULL"
+	0x98      "ograve"              "\xF2"          "NULL"
+	0x99      "ocircumflex"         "\xF4"          "NULL"
+	0x9A      "odieresis"           "\xF6"          "NULL"
+	0x9B      "otilde"              "\xF5"          "NULL"
+	0x9C      "uacute"              "\xFA"          "NULL"
+	0x9D      "ugrave"              "\xF9"          "NULL"
+	0x9E      "ucircumflex"         "\xFB"          "NULL"
+	0x9F      "udieresis"           "\xFC"          "NULL"
+	0xA0      "Dagger"              "*"             "NULL"  ; map to asterisk */
+	0xA1      "Reserved"            "\xB0"          "\xB0"  ; degrees symbol 
+	0xA2      "Cent"                "\xA2"          "NULL"
+	0xA3      "Pound"               "\xA3"          "NULL"
+	0xA4      "section"             "\xA7"          "NULL"
+	0xA5      "Bullet"              "\xB7"          "NULL"
+	0xA6      "paragraph"           "\xB6"          "NULL"
+	0xA7      "germanbdbls"         "\xDF"          "NULL"
+	0xA8      "registerserif"       "(R)"           "NULL"
+	0xA9      "copyrightserif"      "\xA9"          "NULL"
+	0xAA      "trademarkserif"      "\xAE"          "NULL"
+	0xAB      "acute"               "\xB4"          "NULL"
+	0xAC      "dieresis"            "\xA8"          "Left"
+	0xAD      "Reserved"            "<>"            "Up"    ; not equal 
+	0xAE      "AE"                  "\xC6"          "Right"
+	0xAF      "Oslash"              "\xD8"          "Down"
+	0xB0      "Reserved"            "\xB0"          "\xB0"  ; infinity, degrees 
+	0xB1      "Reserved"            "\xB1"          "NULL"  ; plus or minus 
+	0xB2      "Reserved"            "<="            "NULL"  ; less or equal 
+	0xB3      "Reserved"            ">="            "NULL"  ; greater or equal 
+	0xB4      "Yen"                 "\xA5"          "x"
+	0xB5      "Reserved"            "\xB5"          "NULL"  ; mu 
+	0xB6      "Reserved"            "NULL"          "NULL"  ; partial deriv 
+	0xB7      "Reserved"            "Sigma"         "NULL"  ; Sigma 
+	0xB8      "Reserved"            "Pi"            "NULL"  ; Pi 
+	0xB9      "Reserved"            "pi"            "NULL"  ; pi 
+	0xBA      "Reserved"            "NULL"          "NULL"  ; integral 
+	0xBB      "ordfeminine"         "\xAA"          "NULL"
+	0xBC      "ordmasculine"        "\xB0"          "NULL"
+	0xBD      "Reserved"            "NULL"          "NULL"
+	0xBE      "ae"                  "\xE6"          "NULL"
+	0xBF      "oslash"              "\xF8"          "NULL"
+	0xC0      "questiondown"        "\xBF"          "NULL"
+	0xC1      "exclamdown"          "\xA1"          "NULL"
+	0xC2      "logicalnot"          "\xAC"          "NULL"
+	0xC3      "Reserved"            "NULL"          "NULL"  ; radical 
+	0xC4      "florin"              "NULL"          "NULL"
+	0xC5      "Reserved"            "NULL"          "NULL"  ; congruency (wavy =) 
+	0xC6      "Reserved"            "delta "        "NULL"  ; Delta 
+	0xC7      "guillemotleft"       "\xAB"          "NULL"
+	0xC8      "guillemotright"      "\xBB"          "NULL"
+	0xC9      "ellipsis"            "..."           "NULL"
+	0xCA      "Reserved"            "NULL"          "NULL"  ; nothing 
+	0xCB      "Agrave"              "\xC0"          "NULL"
+	0xCC      "Atilde"              "\xC3"          "NULL"
+	0xCD      "Otilde"              "\xD5"          "NULL"
+	0xCE      "OE"                  "OE"            "NULL"
+	0xCF      "oe"                  "oe"            "NULL"
+	0xD0      "EnDash"              "-"             "NULL"  ; map to plain hyphen 
+	0xD1      "EmDash"              "--"            "NULL"  ; map to plain hyphen 
+	0xD2      "quotedblleft"        "\x22"          "NULL"  ; map to dbl quote 
+	0xD3      "quotedblright"       "\x22"          "NULL"  ; map to dbl quote 
+	0xD4      "quoteleft"           "'"             "NULL"  ; map to apostrophe 
+	0xD5      "quoteright"          "'"             "NULL"  ; map to apostrophe 
+	0xD6      "Reserved"            "\xF7"          "NULL"  ; divided by 
+	0xD7      "Reserved"            "NULL"          "NULL"  ; diamond 
+	0xD8      "ydieresis"           "\xFF"          "NULL"
+	0xD9      "Ydieresis"           "Y"             "NULL"
+	0xDA      "fraction"            "/"             "NULL"  ; map to slash 
+	0xDB      "currency"            "\xA4"          "NULL"
+	0xDC      "guilsinglleft"       "<"             "NULL"
+	0xDD      "guilsinglright"      ">"             "NULL"
+	0xDE      "fi"                  "NULL"          "NULL"  ; not used 
+	0xDF      "fl"                  "NULL"          "NULL"  ; not used 
+	0xE0      "daggerdbl"           "*"             "NULL"  ; map to asterisk 
+	0xE1      "periodcentered"      "\xB7"          "NULL"  ; map to bullet 
+	0xE2      "quotesinglbase"      "\x22"          "NULL"
+	0xE3      "quotedblbase"        "\x22"          "NULL"
+	0xE4      "perthousand"         "*"             "*"     ; some sort of bullet 
+	0xE5      "Acircumflex"         "\xC2"          "NULL"
+	0xE6      "Ecircumflex"         "\xCA"          "NULL"
+	0xE7      "Aacute"              "\xC1"          "NULL"
+	0xE8      "Edieresis"           "\xCB"          "NULL"
+	0xE9      "Egrave"              "\xC8"          "NULL"
+	0xEA      "Iacute"              "\xCD"          "NULL"
+	0xEB      "Icircumflex"         "\xCE"          "NULL"
+	0xEC      "Idieresis"           "\xCF"          "NULL"
+	0xED      "Igrave"              "\xCC"          "NULL"
+	0xEE      "Oacute"              "\xD3"          "NULL"
+	0xEF      "Ocircumflex"         "\xD4"          "NULL"
+	0xF0      "Reserved"            "NULL"          "NULL"  ; nothing 
+	0xF1      "Ograve"              "\xD2"          "NULL"
+	0xF2      "Uacute"              "\xDA"          "NULL"
+	0xF3      "Ucircumflex"         "\xDB"          "NULL"
+	0xF4      "Ugrave"              "\xD9"          "NULL"
+	0xF5      "dotlessi"            "i"             "NULL"
+	0xF6      "circumflex"          "NULL"          "NULL"
+	0xF7      "tilde"               "~"             "NULL"  ; map to ascii tilde 
+	0xF8      "macron"              "\xAF"          "NULL"
+	0xF9      "breve"               "NULL"          "NULL"
+	0xFA      "dotaccent"           "NULL"          "NULL"
+	0xFB      "ring"                "\xB0"          "NULL"
+	0xFC      "cedilla"             "\xB8"          "NULL"
+	0xFD      "hungarumlaut"        "NULL"          "NULL"
+	0xFE      "ogonek"              "NULL"          "NULL"
+	0xFF      "Reserved"            "NULL"          "NULL"  ; nothing 

@@ -1,0 +1,200 @@
+;-----------------------------------------------------------------------
+;
+;  Copyright (1993-95) Bentley Systems, Inc., All rights reserved.
+;
+;  Application Make File
+;
+;    $Logfile:   J:/mdl/examples/myapp/helpfile/rtf2s.sev  $
+;   $Workfile:   rtf2s.set  $
+;   $Revision: 1.1.1.1 $
+;   	$Date: 1998/07/27 18:19:12 $
+;
+;  "MicroStation" is a registered trademark and "MDL" and "MicroCSL"
+;  are trademarks of Bentley Systems, Inc.
+;
+;  Limited permission is hereby granted to reproduce and modify this
+;  copyrighted material provided that the resulting code is used only
+;  in conjunction with Bentley Systems products under the terms of the
+;  license agreement provided therein, and that this notice is retained
+;  in its entirety in any such reproduction or modification.
+;
+;-----------------------------------------------------------------------
+;-----------------------------------------------------------------------
+; Settings file for use with the rtf2s help file conversion program.
+; The version information below may be useful in identifying problems.
+;
+;    Language:   English
+;-----------------------------------------------------------------------
+
+[TopicBodyPara]
+; These paragraph styles are passed as plain text.  Paragraph numbers
+; are ignored.
+;
+"Normal,sp"
+"Normal"
+"sp"
+"Body"
+"PrcedureText"
+"Description"
+"TDescription"
+"PrecedeBulleted,pb"
+"PrecedeProcedure,pp"
+"List"
+"FunctionUse,fu"
+"MenuUseHeader,muh"
+"MenuUse,mu"
+"Keyin,ki"
+"KeyInLabel"
+;
+; The tag below will be used to support tracking.
+; Currently passed as body text.
+"Keyin"
+
+[ListEntryPara]
+; These paragraph styles are considered list entries.  Paragraph
+; numbers or bullet characters are included if present.  Paragraph
+; text is indented.
+;
+"Bullet,bt"
+"Bullet"
+"BulletLast,bl"
+"BulletLast"
+"LBullet"
+"LStep"
+"Step"
+"LResponse"
+"Response"
+"Procedure,pr"
+"ProcedureLast,pl"
+"Item"
+"LItem"
+
+[IgnorePara]
+; Paragraphs in these styles are ignored.
+;
+"Procedure"
+"CCaption"
+"RCaption"
+"Title,ti"
+"FrontPage,fp"
+"FrontPageNumber,fpn"
+"Part1,pt1"
+"Caption,cp"
+"footer"
+"header"
+"LeftHeader"
+"RightHeader"
+"line number"
+"HelpSeeAlso,hs"
+"HelpTopic,ht"
+"index 1"
+"index 2"
+"IndexEntry,ie"
+"PostScript"
+"toc 1"
+"toc 2"
+"toc 3"
+"toc 4"
+
+[ContextPara]
+; Used to mark an article for later retrieval by context sensitive
+; help. Styles used for this purpose are usually conditional and/or
+; hidden in the style sheet.
+
+[AttentionChar]
+; Paragraphs in these styles will be deleted, and the following
+; paragraph will be preceeded with the replacement string.  The
+; replacement string can vary depending on the contents of the
+; deleted paragraph.
+;
+; "<name>"<whitespace><dependency string><whitespace><replacement string>
+;
+"Note,no"   v	"Note: "
+"Note,no"   W	"Warning: "
+"Note,no"   3	"Hint: "
+"Note"	    v	"Note: "
+"Note"      3	"Hint: "
+"Warning"   W	"Warning: "
+
+[HelpTogglePara]
+; Paragraphs in these styles signal the help converter to ignore any
+; and all subsequent paragraphs until another paragraph in one of these
+; styles is encountered.  This is useful for omitting documentation from
+;  on-line help that must appear in the printed version.
+;
+"HelpToggle,to"
+
+[MonoPara]
+; Paragraphs in these styles will be displayed in the Help window in
+; a monospaced (non-proportional) font.
+;
+"Code,co"
+"CodeBreak,cb"
+"CodeLast,cl"
+
+[MonoFont]
+; Text in these fonts will be displayed in the Help window in
+; a monospaced (non-proportional) font.
+;
+; Warning: Do not list any styles in this section that are also listed below
+; in the HyperTextFont section.
+;
+"Letter Gothic"
+"I Letter Gothic Slanted"
+"Courier"
+
+[Hypertextfont]
+; Text in these fonts will be marked as hypertext if a destination
+; can be found.
+;.
+"B Letter Gothic Bold"
+"BI Letter Gothic BoldSlanted"
+
+[TopicTitlePara]
+; This section describes the document structure by specifying the
+; logical depth of each type of heading paragraph.  Paragraphs in
+; these styles are converted into topic titles.  The numbers indicate
+; the logical depth of each heading type within the document, as
+; integer >= 1.
+;
+; Warning: Do not list any styles in this section that you do not want
+; to use to start a new help article.
+;
+; "<name>"<whitespace><depth>
+;
+"Volume,v"		1
+"Part2,pt2"		2
+"Part"			3
+"Chapter,ch"		3
+"Chapter"		3
+"Glossary"		3
+"heading 1,h1"		4
+"heading 1"		4
+"heading 2,h2" 		5
+"heading 2" 		5
+"Lesson" 		5
+"heading 2 break,h2b" 	5
+"heading 3,h3"		6
+"heading 3"		6
+"heading 4,h4"		7
+"heading 4"		7
+
+[SubTopicTitlePara]
+; This section contains those headings not listed above. Styles listed
+; herein will not start a new help article, but will be bolded in the
+; help window to make them stand out.
+;
+; Warning: Do not list any styles in this section that are also listed above.
+;
+"heading 4,h4"
+
+[SpaceAfterCutoff]
+; Instead of listing one or more styles, this section contains only a
+; a single number of the range 1-72. This is the value, specified in
+; points, that is used to determine whether a paragraph will be followed
+; by a carriage return when converted into the help system. Any paragraph
+; in the source document that is styled with a "Space After" that is equal
+; to or greater than this value will be followed by a blank line when
+; converted into on-line help.
+;
+6

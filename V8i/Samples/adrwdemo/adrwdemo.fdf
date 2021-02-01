@@ -1,0 +1,203 @@
+/*--------------------------------------------------------------------------------------+
+|
+|     $Source: /miscdev-root/miscdev/mdl/examples/adrwdemo/adrwdemo.fdf,v $
+|
+|  $Copyright: (c) 2013 Bentley Systems, Incorporated. All rights reserved. $
+|
++--------------------------------------------------------------------------------------*/
+Private int	main
+(
+int	     argc,
+char	    *argv[]
+);
+extern "C"
+{
+Private void	line
+(
+char*   unparsed
+);
+
+Private void	line_dataPt1
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void	line_drawLine
+(
+Dpoint3d    *ptP,
+int	    view,
+MstnDrawMode	    drawMode
+);
+
+Private void line_dataPt2
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void	circle
+(
+char*   unparsed
+);
+
+Private void circle_dataPt1
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void circle_drawCircle
+(
+Dpoint3d    *ptP,
+int	    view,
+MstnDrawMode	    drawMode
+);
+
+Private void circle_dataPt2
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void	rect
+(
+char*   unparsed
+);
+
+Private void rect_dataPt1
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void	rect_drawRectangle
+(
+Dpoint3d    *ptP,
+int	    view,
+MstnDrawMode	    drawMode
+);
+
+Private void	rect_dataPt2
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void	rect2
+(
+char*   unparsed
+);
+
+Private void	rect2_dataPt1
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void rect2_dataPt2
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void rect2_dataPt3
+(
+Dpoint3d    *ptP,
+int	    view
+);
+
+Private void	rect2_drawRectangle
+(
+Dpoint3d    *ptP,
+int	    view,
+MstnDrawMode	    drawMode
+);
+
+Private void	changeCircle
+(
+char*   unparsed
+);
+
+Private void	changeCircle_show
+(
+void
+);
+
+Private void	changeCircle_draw
+(
+Dpoint3d *ptP,
+int	  view,
+MstnDrawMode	  drawMode
+);
+
+Private void	changeCircle_accept
+(
+Dpoint3d *ptP,
+int	  view
+);
+
+Private void	changeCircle_cleanup
+(
+void
+);
+
+Private int rMatrixFrom2PtsAndView
+(
+RotMatrix   *rMatrixP,		/* <=  */
+Dpoint3d    *originP,		/*  => */
+Dpoint3d    *xAxisP,		/*  => */
+int	     view
+);
+
+Private int	rMatrixFrom3Pts
+(
+RotMatrix   *rMatrixP,		/* <=  */
+Dpoint3d    *originP,		/*  => */
+Dpoint3d    *xAxisP,		/*  => */
+Dpoint3d    *yDirectionP	/*  => */
+
+);
+
+Private void	showRotMatrix
+(
+RotMatrix   *rMatrixP,	/* => */
+Dpoint3d    *ptP,	/* => */
+double	    scale,	/* => length of lines */
+MstnDrawMode	    drawMode	/* => */
+);
+
+Private void	softConstructionPlane
+(
+Dpoint3d    *outPtP,		/* <=  output point */
+Dpoint3d    *inPtP,		/*  => input point */
+Dpoint3d    *pointOnPlaneP,	/*  => defines plane's position */
+Dpoint3d    *normalVectorP,	/*  => defines plane's rotation */
+int	     view		/*  => cursor view */
+);
+
+Private void	hardConstructionPlane
+(
+Dpoint3d    *outPtP,		/* <=  output point */
+Dpoint3d    *inPtP,		/*  => input point */
+Dpoint3d    *pointOnPlaneP,	/*  => defines plane's position */
+Dpoint3d    *normalVectorP,	/*  => defines plane's rotation */
+int	     view		/*  => cursor view */
+);
+
+Private int	constructionPlane
+(
+Dpoint3d *outPtP,
+Dpoint3d *inPtP,
+Dpoint3d *pointOnPlaneP,  /* defines plane's position */
+Dpoint3d *normalVectorP,  /* defines plane's orientation */
+int  view,    /* in and out points will appear identical in this view */
+int  perpendicular   /* if TRUE, will ignore view and project to closest */
+);
+
+Private BoolInt pointIsSnapOrPrecision
+(
+void
+);
+
+}

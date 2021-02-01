@@ -1,0 +1,150 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: /miscdev-root/miscdev/mdl/examples/scanfile/scanfile.mke,v $
+#
+#  $Copyright: (c) 2013 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+appName		= scanfile
+sAppName	= scanf
+
+privateInc	= $(baseDir)
+langSpec	= $(baseDir)english/
+
+%include mdl.mki		# Load standard rule definitions.
+
+#----------------------------------------------------------
+# Create needed output directories in case they don't exist
+#----------------------------------------------------------
+always:
+    !~@mkdir $(o)
+    !~@mkdir $(rscObjects)
+    !~@mkdir $(reqdObjs)
+
+dirToSearch = $(genSrc)
+%include cincapnd.mki
+
+#----------------------------------------------------------------------
+#   The following defines the dependency list for the CODE portion
+#   of this application. Included are any CODE libraries or objects
+#   from any related applications. Typically these files are linked
+#   together into a file with a '.mp' extension. (Mdl Program module)
+#
+#   NOTE: ALL literal strings which would be contained in a .mc file
+#         should be placed in a messageList resource located in the
+#         directory pointed to by 'langSpec'. All strings should be
+#         loaded from a messageList resource at runtime.
+#----------------------------------------------------------------------
+
+#----------------------------------------------------------------------
+#   The following defines the dependency list for any NON-Translatable
+#   resources used by this application. Typically this includes any
+#   command table definitions or resource type definitions. This list
+#   would also contain the completed CODE portion of the application.
+#   Typically these files are lib'd together into a file with a '.mi'
+#   extension. (Mdl Intermediate application)
+#----------------------------------------------------------------------
+
+appRscs =			    \
+   $(rscObjects)$(sAppName)cmd.rsc  \
+   $(o)$(appName).rsc 
+
+#----------------------------------------------------------------------
+# 	Create output directories
+#----------------------------------------------------------------------
+$(o)$(tstdir)			: $(o)$(tstdir)
+
+$(rscObjects)$(tstdir)		: $(rscObjects)$(tstdir)
+
+#----------------------------------------------------------------------
+#   The following sections compiles any base resources used by the
+#   application. THESE RESOURCES DO NOT CONTAIN TRANSLATABLE TEXT.
+#   These typically include MDL command table resources an any user-defined
+#   resource type definitions.
+#
+#   NOTE: Any source file generated during the build process should
+#         placed in the directory pointed to by the 'genSrc' macro.
+#         'genSrc' is a reserved macro defined in MDL.MKI.
+#----------------------------------------------------------------------
+
+$(genSrc)$(sAppName)cmd.h	: $(baseDir)$(sAppName)cmd.r
+
+$(rscObjects)$(sAppName)cmd.rsc	: $(baseDir)$(sAppName)cmd.r
+
+#------------------------------------------------------------------------
+# Create & compile the app's type resource using rsctype & rcomp
+#------------------------------------------------------------------------
+$(o)$(appName).r	: $(baseDir)$(appName).mt 	\
+			    	$(privateInc)$(appName).h
+
+$(o)$(appName).rsc    	: $(o)$(appName).r
+
+#----------------------------------------------------------------------
+#	The following section builds any necessary CODE modules for the
+#	application.
+#----------------------------------------------------------------------
+
+#------------------------------------------------
+#   Set up to use dlmcomp.mki and dlmlink.mki
+#------------------------------------------------
+dlmObjs = \
+$(o)$(appName)$(oext) 
+ 
+DLM_NO_DLS              = 1             # USE DLLEXPORT IN .CPP
+DLM_NO_DEF              = 1
+DLM_NOENTRY             = 1
+DLM_NO_NTBSADDR         = 1
+DLM_OBJECT_DEST         = $(o)
+DLM_LIBDEF_SRC          = $(baseDir)
+DLM_DEST                = $(mdlapps)
+DLM_NAME                = $(appName)
+DLM_ENTRY_NAME          = dllentry
+DLM_RESL_NAME           = $(appName)
+DLM_OBJECT_FILES        = $(dlmObjs)
+DLM_SYM_NAME            = $(dllName)
+DLM_SPECIAL_LINKOPT     = -fixed:no
+DLM_LIBRARY_FILES       = $(mdlLibs)toolsubs.lib \
+                          $(mdlLibs)BentleyDgn.lib \
+                          $(mdlLibs)ditemlib.lib \
+                          $(mdlLibs)msbspline.lib \
+                          $(mdlLibs)mdllib.lib 
+
+#----------------------------------------------------------------------
+#   Compile the source files for the DLM
+#----------------------------------------------------------------------
+
+$(o)$(appName)$(oext)		: $(baseDir)$(appName).cpp 
+
+%include dlmlink.mki
+
+#----------------------------------------------------------------------
+#	The following section generates the MDL Intermediate module. This
+#	module contains the MDL CODE module and any non-translatable
+#	resource modules.
+#
+#	NOTE: This module MUST be placed in the directory pointed to by
+#         the 'reqdObjs' macro defined in MDL.MKI. This module is
+#         shipped as part of the Foreign Language Translation Kit.
+#----------------------------------------------------------------------
+
+$(reqdObjs)$(appName).mi		: $(appRscs)
+    $(msg)
+    > $(o)make.opt
+    -o$@
+    $(appRscs)
+    <
+    $(RLibCmd) @$(o)make.opt
+    ~time
+
+#----------------------------------------------------------------------
+#	The last step to this makefile is to include the MANDATORY makefile
+#	used to compile the translatable resources and create the final
+#	MDL application. This file is typically located in the directory
+#	pointed to by the 'baseDir' macro defined by the user at the top
+#	of this file. The standard extension for this included makefile is
+#	'.mki' and the file is distributed as part of the Foreign Language
+#	Translation Kit.
+#----------------------------------------------------------------------
+
+%include $(baseDir)$(sAppName)rsc.mki
+

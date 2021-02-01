@@ -1,0 +1,3 @@
+#pragma once
+
+#define CFGV_TEXTSTYLE ("AEP_SPDS_LEADER_TEXTSTYLE")

@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPDS [V8i]", "V8i\SPDS [V8i].vcxproj", "{3CD80B04-B7B7-4A9F-B035-1E19531DD833}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPDS [CONNECT]", "CONNECT\SPDS [CONNECT].vcxproj", "{E6FB7BF4-63E3-4DD0-BB3F-AF68B8CB2F92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CD80B04-B7B7-4A9F-B035-1E19531DD833}.Debug|x64.ActiveCfg = Debug|x64
+		{3CD80B04-B7B7-4A9F-B035-1E19531DD833}.Debug|x64.Build.0 = Debug|x64
+		{3CD80B04-B7B7-4A9F-B035-1E19531DD833}.Debug|x86.ActiveCfg = Debug|Win32
+		{3CD80B04-B7B7-4A9F-B035-1E19531DD833}.Release|x64.ActiveCfg = Release|x64
+		{3CD80B04-B7B7-4A9F-B035-1E19531DD833}.Release|x64.Build.0 = Release|x64
+		{3CD80B04-B7B7-4A9F-B035-1E19531DD833}.Release|x86.ActiveCfg = Release|Win32
+		{E6FB7BF4-63E3-4DD0-BB3F-AF68B8CB2F92}.Debug|x64.ActiveCfg = Debug|x64
+		{E6FB7BF4-63E3-4DD0-BB3F-AF68B8CB2F92}.Debug|x64.Build.0 = Debug|x64
+		{E6FB7BF4-63E3-4DD0-BB3F-AF68B8CB2F92}.Debug|x86.ActiveCfg = Debug|Win32
+		{E6FB7BF4-63E3-4DD0-BB3F-AF68B8CB2F92}.Release|x64.ActiveCfg = Release|x64
+		{E6FB7BF4-63E3-4DD0-BB3F-AF68B8CB2F92}.Release|x64.Build.0 = Release|x64
+		{E6FB7BF4-63E3-4DD0-BB3F-AF68B8CB2F92}.Release|x86.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ext.irisoft.ru:8088/tfs/defaultcollection
+		SccProjectUniqueName0 = CONNECT\\SPDS\u0020[CONNECT].vcxproj
+		SccProjectName0 = CONNECT
+		SccAuxPath0 = https://ext.irisoft.ru:8088/tfs/defaultcollection
+		SccLocalPath0 = CONNECT
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = V8i\\SPDS\u0020[V8i].vcxproj
+		SccProjectName1 = V8i
+		SccAuxPath1 = https://ext.irisoft.ru:8088/tfs/defaultcollection
+		SccLocalPath1 = V8i
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+EndGlobal

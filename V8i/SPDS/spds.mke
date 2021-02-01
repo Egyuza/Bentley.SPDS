@@ -1,0 +1,131 @@
+appName         = spds
+sAppName        = spds
+
+langSpec        = $(baseDir)english/
+
+
+%include mdl.mki
+
+dirToSearch = $(MSMDE)/mdl/MicroStationAPI
+%include cincapnd.mki
+
+#----------------------------------------------------------------------
+# Define macros for files included in our link and resource merge
+#----------------------------------------------------------------------
+appRscs         = $(o)$(appName).rsc \
+                  $(o)$(appName)msg.rsc \
+                  $(o)$(sAppName)cmd.rsc
+
+#----------------------------------------------------------------------
+# Create needed output directories if they don't exist
+#----------------------------------------------------------------------
+always:
+    !~@mkdir $(o)
+
+#-----------------------------------------------------------------------
+# Define constants specific to this example
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Generate non-language resource files
+#-----------------------------------------------------------------------
+$(baseDir)$(appName)cmd.h       : $(baseDir)$(appName)cmd.r
+
+$(o)$(appName)cmd.rsc           : $(baseDir)$(appName)cmd.r
+
+$(o)$(appName).rsc              :$(baseDir)$(appName).r
+
+
+#-----------------------------------------------------------------------
+# Generate language resource files
+#-----------------------------------------------------------------------
+$(o)$(appName)msg.rsc              :$(langSpec)$(appName)msg.r
+
+#-----------------------------------------------------------------------
+#  Build Native Code 
+#-----------------------------------------------------------------------
+dlmObjs = \
+$(o)LeaderSetTool$(oext) \
+$(o)LeaderToolModify$(oext) \
+$(o)ElementHelper$(oext) \
+$(o)TextHelper$(oext) \
+$(o)TextGrabHelper$(oext) \
+$(o)$(appName)$(oext) 
+
+DLM_NAME            = $(appName)
+DLM_DEST            = $(mdlapps)
+DLM_SYM_NAME        = $(appName)sym
+DLM_RESL_NAME       = $(appName)res
+DLM_OBJECT_DEST     = $(o)
+DLM_LIBDEF_SRC      = $(baseDir)
+DLM_OBJECT_FILES    = $(dlmObjs)
+DLM_LIBRARY_FILES   = $(dlmLibs)
+DLM_NO_DLS          = 1                    # use DLLEXPORT instead
+DLM_NO_DEF          = 1
+DLM_NOENTRY         = 1
+DLM_NO_DELAYLOAD    = 1                
+DLM_NO_NTBSADDR     = 1
+DLM_LIBRARY_FILES = $(mdlLibs)BentleyDgn.lib \
+                    $(mdlLibs)toolsubs.lib \
+                    $(mdlLibs)ditemlib.lib \
+                    $(mdlLibs)mdllib.lib \
+                    $(mdlLibs)Bentley.MicroStation.Templates.Support.lib
+DLM_NO_SIGN         = 1     # only for test apps; any delivered app MUST be signed.
+
+#------------------------------------------------
+# Compile the source files for the DLM
+#------------------------------------------------
+
+$(o)LeaderSetTool$(oext) : $(baseDir)LeaderSetTool.cpp   $(baseDir)LeaderSetTool.h
+
+$(o)LeaderToolModify$(oext) : $(baseDir)LeaderToolModify.cpp   $(baseDir)LeaderToolModify.h
+
+$(o)ElementHelper$(oext) :  $(baseDir)ElementHelper.cpp   $(baseDir)ElementHelper.h
+
+$(o)TextHelper$(oext) : $(baseDir)TextHelper.cpp   $(baseDir)TextHelper.h
+
+$(o)TextGrabHelper$(oext) : $(baseDir)TextGrabHelper.cpp   $(baseDir)TextGrabHelper.h
+
+$(o)$(appName)$(oext) : $(baseDir)$(appName).cpp
+
+always:
+    !~@mkdir $(DLM_DEST)
+
+%include dlmlink.mki
+
+#-----------------------------------------------------------------------
+# Merge Objects into one file
+#-----------------------------------------------------------------------
+$(o)$(sAppName).mi              : $(appRscs)
+    $(msg)        
+    >$(o)make.opt
+    -o$@
+    $(appRscs)
+    <
+    $(RLibCmd) @$(o)make.opt
+    ~time
+
+#----------------------------------------------------------------------
+# complete construction of the .ma
+#----------------------------------------------------------------------
+# %include $(sAppName)rsc.mki
+#
+
+appRscs = $(o)$(sAppName).mi
+
+%if defined (BSI)
+    MA_NAME         = $(appName)
+    MA_DEST         = $(mdlApps)
+    MA_RSC_FILES    = $(appRscs)
+    %include malink.mki
+%else
+    $(mdlapps)$(appName).ma         : $(appRscs)
+        $(msg)
+        > $(o)make.opt
+        -o$@
+        $(appRscs)
+        <
+        $(RLibCmd) @$(o)make.opt
+        ~time
+
+%endif
+

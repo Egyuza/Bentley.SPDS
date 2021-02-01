@@ -1,0 +1,116 @@
+#*--------------------------------------------------------------------------------------+
+#
+#     $Source: /miscdev-root/miscdev/mdl/examples/CustomizeTestApp/CustomizeTestApp.mke,v $
+#    $RCSfile: CustomizeTestApp.mke,v $
+#   $Revision: 1.1 $
+#       $Date: 2008/06/02 15:09:34 $
+#     $Author: Mark.Anderson $
+#
+#  $Copyright: (c) 2008 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------*/
+appName    = CustomizeTestApp
+sAppName   = CustomizeTestApp
+
+BaseDir     = $(_MakeFilePath)
+privateInc  = $(BaseDir)
+langSpec    = $(BaseDir)English/
+
+#---------------------------------------------
+# mdl.mki contains the default rules for creating .rsc, .mo, etc files
+# mdlexmpl.mki contains the output directory overrides used by examples
+#---------------------------------------------
+%include mdl.mki
+
+dirToSearch = $(MSMDE)mdl/MicroStationAPI/
+%include cincapnd.mki
+
+#----------------------------------------------------------------------
+# Create needed output directories if they don't exist
+#----------------------------------------------------------------------
+$(o)$(tstdir)			    : $(o)$(tstdir)
+
+$(rscObjects)$(tstdir)		: $(rscObjects)$(tstdir)
+
+$(reqdObjs)$(tstdir)		: $(reqdObjs)$(tstdir)
+    
+appRscs =                        \
+                                $(o)$(appName)cmd.rsc 
+
+#------------------------------------------------------------------------
+# Create & compile the app's type resource using rsctype & rcomp
+#------------------------------------------------------------------------
+#$(o)$(appName)typ.r	 : $(baseDir)$(appName)typ.mt 	\
+#			    	$(privateInc)$(appName).h
+
+#$(o)$(appName)typ.rsc    : $(o)$(appName)typ.r
+
+$(o)$(appName)cmd.h         : $(baseDir)$(appName)cmd.r
+
+$(o)$(appName)cmd.rsc		    : $(baseDir)$(appName)cmd.r \
+                                      $(baseDir)$(appName).h 
+#-----------------------------------------------------------------------
+#  Build Native Code 
+#-----------------------------------------------------------------------
+dlmObjs = \
+$(o)$(appName)$(oext) 
+
+MSJ_SKIP_SIGNRSCS   = 1
+DLM_NAME            = $(appName)
+DLM_DEST            = $(mdlapps)
+DLM_SYM_NAME        = $(appName)sym
+DLM_RESL_NAME       = $(appName)res
+DLM_OBJECT_DEST     = $(o)
+DLM_LIBDEF_SRC      = $(baseDir)
+DLM_OBJECT_FILES    = $(dlmObjs)
+DLM_LIBRARY_FILES   = $(dlmLibs)
+DLM_NO_DLS          = 1		    # use DLLEXPORT instead
+DLM_NO_DEF          = 1
+DLM_NOENTRY         = 1
+DLM_NO_DELAYLOAD    = 1		
+DLM_LIBRARY_FILES 	= $(mdlLibs)bentleydgn.lib \
+                          $(mdlLibs)toolsubs.lib \
+                          $(mdlLibs)ditemlib.lib \
+                          $(mdlLibs)mdllib.lib  \
+                          $(mdlLibs)Bentley.MicroStation.Templates.Support.lib
+
+#------------------------------------------------
+#	Compile the source files for the DLM
+#------------------------------------------------
+%include dlmcomp.mki
+
+
+$(o)$(appName)$(oext)   : $(baseDir)$(appName).cpp
+
+%include dlmlink.mki
+
+#-----------------------------------------------------------------------
+#	Merge Objects into one file
+#-----------------------------------------------------------------------
+$(o)$(sAppName).mi        : $(appRscs)
+	$(msg)	
+	>$(o)make.opt
+	-o$@
+	$(appRscs)
+	<
+	$(RLibCmd) @$(o)make.opt
+	~time
+
+#----------------------------------------------------------------------
+# complete construction of the .ma
+#----------------------------------------------------------------------
+# %include $(sAppName)rsc.mki
+#
+
+appRscs =   \
+         $(o)$(sAppName).mi
+
+$(mdlapps)$(appName).ma		: $(appRscs)
+	$(msg)
+	> $(o)make.opt
+	-o$@
+	$(appRscs)
+	<
+	$(RLibCmd) @$(o)make.opt
+	~time
+
